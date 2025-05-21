@@ -1,0 +1,49 @@
+algoritmo "CalculadoraSimples"
+// Função : entrada/saída de dados
+// Autor : Carla coder
+// Data : 20/03/2025
+// Seção de Declarações
+var
+    num1, num2: inteiro
+    soma, subtracao, multiplicacao: inteiro
+    divisao: real
+    repetir: caractere
+
+inicio
+    repetir <- "s" // Inicializa a variável para entrar no loop
+
+    enquanto (repetir = "s") ou (repetir = "S") faca
+        // Solicita os números ao usuário
+        escreva("Digite o primeiro número inteiro: ")
+        leia(num1)
+        escreva("Digite o segundo número inteiro: ")
+        leia(num2)
+
+        // Realiza as operações matemáticas
+        soma <- num1 + num2
+        subtracao <- num1 - num2
+        multiplicacao <- num1 * num2
+
+        // Verifica se a divisão é possível
+        se num2 <> 0 entao
+            divisao <- num1 / num2
+        senao
+            escreval("Erro: Divisão por zero não permitida.")
+            divisao <- 0
+        fimse
+
+        // Exibir os resultados na tela
+        escreval("Resultados:")
+        escreval("Soma: ", soma)
+        escreval("Subtração: ", subtracao)
+        escreval("Multiplicação: ", multiplicacao)
+        escreval("Divisão: ", divisao)
+
+        // Pergunta se o usuário deseja repetir o cálculo
+        escreva("Deseja realizar outro cálculo? (s/n): ")
+        leia(repetir)
+
+    fimenquanto
+
+    escreval("Calculadora encerrada.")
+fimalgoritmo

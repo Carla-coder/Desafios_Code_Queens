@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validação de Senha</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px 45px 30px 25px; /* top right bottom left */
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .message {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Validação de Senha</h2>
+      <div id="step1">
+        <input type="text" id="nome" placeholder="Digite seu nome" />
+        <input type="password" id="senha" placeholder="Crie uma senha" />
+        <button onclick="criarSenha()">Salvar senha</button>
+      </div>
+
+      <div id="step2" style="display: none">
+        <p id="cumprimento"></p>
+        <input type="password" id="tentativa" placeholder="Digite sua senha" />
+        <button onclick="validarSenha()">Entrar</button>
+        <p class="message" id="mensagem"></p>
+      </div>
+    </div>
+
+    <script>
+      let senhaCorreta = "";
+      let nomeUsuario = "";
+      let tentativas = 0;
+
+      function criarSenha() {
+        nomeUsuario = document.getElementById("nome").value.trim();
+        senhaCorreta = document.getElementById("senha").value.trim();
+
+        if (nomeUsuario === "" || senhaCorreta === "") {
+          alert("Por favor, preencha todos os campos.");
+          return;
+        }
+
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+        document.getElementById(
+          "cumprimento"
+        ).innerText = `Olá, ${nomeUsuario}, digite sua senha:`;
+      }
+
+      function validarSenha() {
+        const tentativa = document.getElementById("tentativa").value;
+        const mensagem = document.getElementById("mensagem");
+
+        if (tentativa === senhaCorreta) {
+          mensagem.innerText = "Senha correta. Acesso liberado! 🔑";
+          mensagem.style.color = "green";
+        } else {
+          tentativas++;
+          if (tentativas < 3) {
+            mensagem.innerText = `Senha incorreta! Você ainda tem ${
+              3 - tentativas
+            } tentativa(s).`;
+            mensagem.style.color = "orange";
+          } else {
+            mensagem.innerText = "Senha incorreta! Acesso bloqueado. 🔒";
+            mensagem.style.color = "red";
+            document.getElementById("tentativa").disabled = true;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

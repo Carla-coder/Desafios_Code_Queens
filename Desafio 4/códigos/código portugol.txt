@@ -1,0 +1,135 @@
+algoritmo "cadastroDeAlunos"
+// Funcao : vetores, matrizes e structs (registros)
+// Autor : Carla coder
+// Data : 27/04/2025
+
+// Secao de Declarações de Variáveis
+var
+    N, M, i, j: inteiro
+    notas: vetor[1..10000] de real   // Matriz de notas
+    somaAval: vetor[1..100] de real        // Soma das notas por avaliacao
+    mediaAval: vetor[1..100] de real       // Média das avaliações
+    registro: vetor[1..100] de inteiro     // Vetor para os registros dos alunos
+    nome: vetor[1..100] de caractere       // Vetor para os nomes dos alunos
+    media: vetor[1..100] de real           // Vetor para a média dos alunos
+    situacao: vetor[1..100] de caractere   // Vetor para a situação dos alunos (Aprovado/Reprovado)
+    aprovados, reprovados: inteiro        // Contadores de aprovados e reprovados
+    melhorAluno, piorAluno: inteiro       // Índices para o melhor e pior aluno
+    notaTemp: real
+
+inicio
+    // Leitura dos parâmetros N e M
+    escreval("Digite o número de alunos da turma (N): ")
+    leia(N)
+    escreval("Digite o número de avaliações por aluno (M): ")
+    leia(M)
+
+    // Inicializando os vetores e a matriz
+    para i de 1 ate M faca
+        somaAval[i] <- 0  // Inicializa soma das avaliações com 0
+    fimpara
+
+    // População de dados dos alunos e notas
+    para i de 1 ate N faca
+        escreval("Digite o registro do aluno ", i, ": ")
+        leia(registro[i])
+        escreval("Digite o nome do aluno ", i, ": ")
+        leia(nome[i])
+
+        para j de 1 ate M faca
+            escreval("Digite a nota ", j, " do aluno ", i, ": ")
+            leia(notaTemp)
+            notas[(i-1)*M + j] <- notaTemp
+            somaAval[j] <- somaAval[j] + notaTemp  // Acumula a soma das notas por avaliação
+        fimpara
+    fimpara
+
+    // Calculo das médias por avaliação
+    para j de 1 ate M faca
+        mediaAval[j] <- somaAval[j] / N  // Calcula média das avaliações
+    fimpara
+
+    // Cálculo da média de cada aluno e definição da situação
+    para i de 1 ate N faca
+        media[i] <- 0  // Inicializa a média do aluno
+        para j de 1 ate M faca
+            media[i] <- media[i] + notas[(i-1)*M + j]  // Soma das notas do aluno
+        fimpara
+
+        media[i] <- media[i] / M  // Calcula a média do aluno
+
+        // Define a situação do aluno
+        se media[i] >= 6.0 entao
+            situacao[i] <- "Aprovado"
+        senao
+            situacao[i] <- "Reprovado"
+        fimse
+    fimpara
+
+    // Exibicao das médias por avaliação
+    escreval("Médias por avaliação:")
+    para j de 1 ate M faca
+        escreval("Avaliação ", j, ": ", mediaAval[j])
+    fimpara
+
+    // Exibição da lista de alunos
+    escreval("Lista de alunos:")
+    para i de 1 ate N faca
+        escreval("Registro: ", registro[i])
+        escreval("Nome: ", nome[i])
+        escreval("Media: ", media[i])
+        escreval("Situacao: ", situacao[i])
+    fimpara
+
+    // Contagem de aprovados e reprovados
+    aprovados <- 0
+    reprovados <- 0
+
+    para i de 1 ate N faca
+        se situacao[i] = "Aprovado" entao
+            aprovados <- aprovados + 1
+        senao
+            reprovados <- reprovados + 1
+        fimse
+    fimpara
+
+    escreval("Número de alunos aprovados: ", aprovados)
+    escreval("Número de alunos reprovados: ", reprovados)
+
+    // Determinação do melhor e pior aluno
+    melhorAluno <- 1
+    piorAluno <- 1
+
+    para i de 2 ate N faca
+        se media[i] > media[melhorAluno] entao
+            melhorAluno <- i
+        fimse
+
+        se media[i] < media[piorAluno] entao
+            piorAluno <- i
+        fimse
+    fimpara
+
+    escreval("Melhor aluno: ", nome[melhorAluno], " com média ", media[melhorAluno])
+    escreval("Pior aluno: ", nome[piorAluno], " com média ", media[piorAluno])
+
+fimalgoritmo
+
+
+Saída:
+
+Nome: Carla
+Média: 6.5
+Situação: Aprovado
+Registro: 3
+Nome: Paloma
+Média: 7.5
+Situação: Aprovado
+Número de alunos aprovados: 2
+Número de alunos reprovados: 0
+Melhor aluno: Paloma com média: 7.5
+Pior aluno: Carla com média 6.5
+
+Fim da execução.
+
+

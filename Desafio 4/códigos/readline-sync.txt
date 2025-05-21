@@ -1,0 +1,129 @@
+
+✅ Para rodar no Node:
+
+Instale o pacote: npm install readline-sync
+
+Execute: node cadastroDeAlunos.js
+
+Exemplo da Entrada e Saída:
+
+Digite o n├║mero de alunos da turma (N): 2
+Digite o n├║mero de avalia├º├Áes por aluno (M): 2
+Digite o registro do aluno 1: 1
+Digite o nome do aluno 1: Carla
+Digite a nota 1 do aluno Carla: 8
+Digite a nota 2 do aluno Carla: 10
+Digite o registro do aluno 2: 2
+Digite o nome do aluno 2: Ana
+Digite a nota 1 do aluno Ana: 5
+Digite a nota 2 do aluno Ana: 4
+
+Médias por avaliação:
+Avaliação 1: 6.50
+Avaliação 2: 7.00
+
+Lista de alunos:
+Registro: 1
+Nome: Carla
+Média: 9.00
+Situação: Aprovado
+---
+Registro: 2
+Nome: Ana
+Média: 4.50
+Situação: Reprovado
+---
+
+Número de alunos aprovados: 1
+Número de alunos reprovados: 1
+
+Melhor aluno: Carla com média 9.00
+Pior aluno: Paloma com média 4.50
+
+📊 Fluxograma (Descrição em Etapas)
+Início
+
+⬇️
+
+Ler N (número de alunos)
+
+Ler M (número de avaliações)
+
+⬇️
+
+Inicializar estruturas:
+
+notas[N][M] → matriz de notas
+
+somaAval[M] → vetor das somas de cada avaliação (iniciado com 0)
+
+mediaAval[M] → vetor de médias de cada avaliação
+
+alunos[N] → vetor de registros (classe Aluno)
+
+⬇️
+
+Para i = 0 até N-1 (para cada aluno):
+
+➔ Ler registro do aluno
+
+➔ Ler nome do aluno
+
+➔ Para j = 0 até M-1 (para cada avaliação):
+
+Ler nota [i][j]
+
+Atualizar somaAval[j] += notas[i][j]
+
+➔ Criar objeto Aluno (registro com registro, nome)
+
+⬇️
+
+Calcular médias das avaliações:
+
+Para cada j = 0 até M-1:
+
+mediaAval[j] = somaAval[j] / N
+
+⬇️
+
+Calcular média e situação de cada aluno:
+
+Para cada i = 0 até N-1:
+
+Calcular média = soma das notas do aluno / M
+
+Se média >= 6.0 → situacao = "Aprovado"
+
+Senão → situacao = "Reprovado"
+
+⬇️
+
+Contar aprovados e reprovados
+
+⬇️
+
+Identificar melhor e pior aluno
+
+Melhor aluno = maior média
+
+Pior aluno = menor média
+
+⬇️
+
+Exibir resultados:
+
+Médias por avaliação
+
+Lista de alunos com registro, nome, média, situação
+
+Total de aprovados e reprovados
+
+Melhor aluno (nome + média)
+
+Pior aluno (nome + média)
+
+⬇️
+
+Fim
+
